@@ -1,0 +1,1 @@
+document.getElementById('fixed-jumbotron').classList.remove('sticky');

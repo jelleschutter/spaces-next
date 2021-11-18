@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Spaces Next",
+  "description": "Improvements for DS Spaces Next",
+  "version": "1.0.0",
+  "homepage_url": "https://github.com/jelleschutter/spaces-next",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://spaces.technik.fhnw.ch/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://spaces.technik.fhnw.ch/*"],
+      "js": ["content-idle.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
