@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Spaces Next",
   "description": "Improvements for DS Spaces Next",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage_url": "https://github.com/jelleschutter/spaces-next",
   "permissions": [
     "webRequest",
@@ -17,6 +17,6 @@
     }
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["browser-polyfill.min.js", "background.js"]
   }
 }
