@@ -12,8 +12,15 @@ function replaceJS(url, str) {
   return str;
 }
 
+function replaceFont(url, str) {
+  if(url.indexOf('https://spaces.technik.fhnw.ch/css/app.css') != -1) {
+    str = str.replace('.font-serif', '.font-serif-disabled');
+  }
+  return str;
+}
+
 function listener(details) {
-  if (details.url == 'https://spaces.technik.fhnw.ch/js/app.js') {
+  if (details.url == 'https://spaces.technik.fhnw.ch/js/app.js' || details.url.indexOf('https://spaces.technik.fhnw.ch/css/app.css') != -1) {
     if (browser.webRequest.filterResponseData) {
       let filter = browser.webRequest.filterResponseData(details.requestId);
       let decoder = new TextDecoder();
@@ -36,8 +43,12 @@ function listener(details) {
     request.open(details.method, details.url, false);
     request.send();
     str = replaceJS(details.url, request.responseText);
+    str = replaceFont(details.url, str);
 
-    return { redirectUrl: 'data:text/javascript,' + encodeURIComponent(str) };
+    const dataType = (details.type == 'stylesheet') ? 'css' : 'javascript';
+    console.log(details)
+
+    return { redirectUrl: `data:text/${dataType},` + encodeURIComponent(str) };
   }
 
   return {};
@@ -47,7 +58,7 @@ browser.webRequest.onBeforeRequest.addListener(
   listener,
   {
     urls: ['https://spaces.technik.fhnw.ch/*'],
-    types: ['script']
+    types: ['script', 'stylesheet']
   },
   ['blocking']
 );

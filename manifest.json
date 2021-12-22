@@ -14,6 +14,13 @@
       "matches": ["https://spaces.technik.fhnw.ch/*"],
       "js": ["content-idle.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://spaces.technik.fhnw.ch/"],
+      "js": [
+        "replace-home-feed.js"
+      ],
+      "run_at": "document_end"
     }
   ],
   "background": {
